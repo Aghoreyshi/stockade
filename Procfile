@@ -1,1 +1,1 @@
-web: newrelic-admin run-program gunicorn vault.wsgi
+web: newrelic-admin run-program gunicorn stockade.wsgi
