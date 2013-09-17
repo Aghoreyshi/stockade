@@ -1,1 +1,1 @@
-web: gunicorn stockade.wsgi
+web: gunicorn stockade.wsgi 
