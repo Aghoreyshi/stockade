@@ -18,3 +18,4 @@ pickle-email-*.html
 *.pyc
 .venv
 local_settings
+staticfiles

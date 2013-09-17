@@ -1,6 +1,8 @@
 # Django settings for stockade project.
 import os
 import ldap
+import dj_database_url
+
 from django_auth_ldap.config import LDAPSearch, GroupOfNamesType
 
 PROJECT_DIR = os.path.split(os.path.split(os.path.abspath(__file__))[0])[0]
@@ -192,3 +194,11 @@ LOGGING = {
     }
 }
 TASTYPIE_DEFAULT_FORMATS = ['json']
+
+
+# Parse database configuration from $DATABASE_URL
+DATABASES['default'] =  dj_database_url.config(default='postgres://arash:@localhost/stockade')
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
