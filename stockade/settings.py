@@ -1,9 +1,7 @@
 # Django settings for stockade project.
 import os
-import ldap
 import dj_database_url
 
-from django_auth_ldap.config import LDAPSearch, GroupOfNamesType
 
 PROJECT_DIR = os.path.split(os.path.split(os.path.abspath(__file__))[0])[0]
 
