@@ -1,10 +1,8 @@
-
 from tastypie.resources import ModelResource
 from models import Project, Secret, ProjectMember
 from django.contrib.auth.models import User
 from tastypie.authentication import BasicAuthentication, ApiKeyAuthentication, MultiAuthentication
 from tastypie.authorization import DjangoAuthorization
-
 
 
 
@@ -38,4 +36,5 @@ class UserResource(ModelResource):
         resource_name = 'users'
         authentication = MultiAuthentication(BasicAuthentication(), ApiKeyAuthentication())
         authorization = DjangoAuthorization()
+        #excludes = ['email', 'password', 'is_active', 'is_staff', 'is_superuser']
 
