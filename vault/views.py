@@ -273,6 +273,9 @@ def login_view(request):
     else:
         return render_to_response('vault/login.html',  context_instance=RequestContext(request))
 
+def base(request):
+    return render_to_response('vault/base.html', context_instance=RequestContext(request))
+
 
 def logout_view(request):
     logout(request)
