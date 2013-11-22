@@ -2,9 +2,10 @@
 
 /* Controllers */
 
-angular.module('vault.controllers', []).
-  controller('VaultCtrl', ['$scope', '$http',
-    function VaultCtrl($scope, $http) {
+var vaultControllers = angular.module('vault.controllers', []);
+
+vaultControllers.controller('ProjectsCtrl', ['$scope', '$http',
+    function ProjectsCtrl($scope, $http) {
       $http({method: 'GET', url: '/api/v1/projects/'}).
         success(function(data, status, headers, config) {
           // this callback will be called asynchronously
@@ -18,5 +19,10 @@ angular.module('vault.controllers', []).
         });
 
       $scope.orderBy = 'name';
-    },
-  ]);
+}]);
+
+vaultControllers.controller('DetailCtrl', function($scope, $routeParams) {
+    $scope.type = $routeParams.type;
+    $scope.id = $routeParams.id;
+    console.log("id" + $scope.id);
+});

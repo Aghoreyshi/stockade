@@ -11,8 +11,8 @@ var app = angular.module('vault', [
   'ui.bootstrap',
   ]);
 app.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/projects', {templateUrl: '/static/partials/projects.html', controller: 'VaultCtrl'});
-  $routeProvider.when('/view2', {templateUrl: '/static/partials/partial2.html', controller: 'MyCtrl2'});
+  $routeProvider.when('/projects', {templateUrl: '/static/partials/projects.html', controller: 'ProjectsCtrl'});
+  $routeProvider.when('/projects/:id', {templateUrl: '/static/partials/detail.html', controller: 'DetailCtrl'});
   $routeProvider.otherwise({redirectTo: '/projects'});
 }]);
 
