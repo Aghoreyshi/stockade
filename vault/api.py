@@ -10,8 +10,8 @@ class ProjectResource(ModelResource):
     class Meta:
         queryset = Project.objects.all()
         resource_name = 'projects'
-        authentication = MultiAuthentication(BasicAuthentication(), ApiKeyAuthentication())
-        authorization = DjangoAuthorization()
+        #authentication = MultiAuthentication(BasicAuthentication(), ApiKeyAuthentication())
+        #authorization = DjangoAuthorization()
 
 
 class SecretResource(ModelResource):

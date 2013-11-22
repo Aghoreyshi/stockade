@@ -2,10 +2,13 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', []).
-  controller('MyCtrl1', [function() {
+angular.module('vault.controllers', []).
+  controller('VaultCtrl', ['$scope', '$http',
+    function VaultCtrl($scope, $http) {
+      $http.get('api/v1/projects/').success(function(data) {
+        $scope.projects = data;
+      });
 
-  }])
-  .controller('MyCtrl2', [function() {
-
-  }]);
+      $scope.orderBy = 'name';
+    },
+  ]);
