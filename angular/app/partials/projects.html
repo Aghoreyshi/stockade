@@ -14,12 +14,18 @@
     <div class="span10">
       <!--Body content-->
 
-      <ul class="projects">
-        <li ng-repeat="project in projects | filter:query | orderBy:orderBy">
-          <a href="#/projects/{{project.id}}">{{project.name}}</a>
-          <p>{{project.id}}</p>
+      <table class="table table-striped">
+        <tr>
+          <th>Project Name</th>
+          <th>Description</th>
+        </tr>
+        <div ng-repeat="project in projects | filter:query | orderBy:orderBy">
+          <tr>
+            <td><a href="#/projects/{{project.id}}">{{project.name}}</a></td>
+            <td>{{project.id}}</td>
+          </tr>
         </li>
-      </ul>
+        </table>
 
     </div>
   </div>

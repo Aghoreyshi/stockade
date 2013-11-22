@@ -1,28 +1,30 @@
 <div class="container">
-  {{projects}}
   <div class="row">
-    <div class="span2">
-      <!--Sidebar content-->
-
-      Search: <input ng-model="query">
-      Sort by:
-      <select ng-model="orderBy">
-        <option value="name">Alphabetical</option>
-        <option value="create_date">Newest</option>
-        <option value="-create_date">Oldest</option>
-      </select>
-
-    </div>
-    <div class="span10">
+    <div class="col-md-10">
       <!--Body content-->
+      <table class="table table-striped">
+        <tr>
+          <th>Project Name</th>
+          <th>Description</th>
+        </tr>
+        <tr ng-repeat="project in projects | filter:query | orderBy:orderBy">
+          <td><a href="#/projects/{{project.id}}">{{project.name}}</a></td>
+          <td>{{project.description}}</td>
+        </tr>
 
-      <ul class="projects">
-        <li ng-repeat="project in projects | filter:query | orderBy:orderBy">
-          <a href="#/projects/{{project.id}}">{{project.name}}</a>
-          <p>{{project.description}}</p>
-        </li>
-      </ul>
-
+      </table>
+    </div>
+    <div class="col-md-2">
+      <!--Sidebar content-->
+     <div class="input-group">
+       <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+       <input type="search" class="form-control input-sm" ng-model="query">
+     </div>
+      <select style="margin-top: 10px" class="form-control" ng-model="orderBy">
+        <option value="name">Alphabetical</option>
+        <option value="-create_date">Newest</option>
+        <option value="create_date">Oldest</option>
+      </select>
     </div>
   </div>
 </div>
