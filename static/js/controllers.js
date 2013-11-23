@@ -13,12 +13,10 @@ vaultControllers.controller('ProjectsCtrl', ['$scope', '$http',
           $scope.projects = data.objects;
         }).
         error(function(data, status, headers, config) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
           $scope.projects = data || status;
         });
 
-      $scope.orderBy = 'name';
+      $scope.orderProp = 'name';
 }]);
 
 vaultControllers.controller('DetailCtrl',
@@ -31,15 +29,11 @@ vaultControllers.controller('DetailCtrl',
 
       $http({method: 'GET', url: '/api/v1/secrets/?project__id=' + $scope.id}).
         success(function(data, status, headers, config) {
-          // this callback will be called asynchronously
-          // when the response is available
           $scope.secrets = data.objects;
         }).
         error(function(data, status, headers, config) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
           $scope.secrets = data || status;
         });
 
-      $scope.orderBy = 'name';
+      $scope.orderProp = 'category';
 });

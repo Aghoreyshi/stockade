@@ -43,8 +43,8 @@ class UserResource(ModelResource):
 
 
 class SecretResource(ModelResource):
-    project = fields.ForeignKey(ProjectResource, 'project', full=False)
-    last_user = fields.ForeignKey(UserResource, 'last_user')
+    project = fields.ForeignKey(ProjectResource, 'project')
+    last_user = fields.ForeignKey(UserResource, 'last_user', full=True)
     class Meta:
         queryset = Secret.objects.all()
         resource_name = 'secrets'
