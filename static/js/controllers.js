@@ -21,8 +21,25 @@ vaultControllers.controller('ProjectsCtrl', ['$scope', '$http',
       $scope.orderBy = 'name';
 }]);
 
-vaultControllers.controller('DetailCtrl', function($scope, $routeParams) {
-    $scope.type = $routeParams.type;
-    $scope.id = $routeParams.id;
-    console.log("id" + $scope.id);
+vaultControllers.controller('DetailCtrl',
+    function DetailCtrl($scope, $routeParams, $http) {
+      $scope.type = $routeParams.type;
+      $scope.id = $routeParams.id;
+      $http.get('/api/v1/projects/?id=' + $scope.id).success(function(data) {
+        $scope.project = data.objects[0];
+      });
+
+      $http({method: 'GET', url: '/api/v1/secrets/?project__id=' + $scope.id}).
+        success(function(data, status, headers, config) {
+          // this callback will be called asynchronously
+          // when the response is available
+          $scope.secrets = data.objects;
+        }).
+        error(function(data, status, headers, config) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+          $scope.secrets = data || status;
+        });
+
+      $scope.orderBy = 'name';
 });

@@ -1,5 +1,31 @@
-<p>This is the partial for DETAIL view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<div class="container">
+  <h3>{{project.name}}<a data-toggle="modal" href="#create-project-modal" class="linkify-glyphicon"><span class="glyphicon glyphicon-plus-sign"></span></a></h3>
+  <div class="row">
+    <div class="col-md-10">
+      <!--Body content-->
+      <table class="table table-striped">
+        <tr>
+          <th>Username</th>
+          <th>Description</th>
+        </tr>
+        <tr ng-repeat="secret in secrets | filter:query | orderBy:orderBy">
+          <td>{{secret.username}}</a></td>
+          <td>{{secret.description}}</td>
+        </tr>
+
+      </table>
+    </div>
+    <div class="col-md-2">
+      <!--Sidebar content-->
+     <div class="input-group">
+       <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+       <input type="search" class="form-control input-sm" ng-model="query">
+     </div>
+      <select style="margin-top: 10px" class="form-control" ng-model="orderBy">
+        <option value="name">Alphabetical</option>
+        <option value="-create_date">Newest</option>
+        <option value="create_date">Oldest</option>
+      </select>
+    </div>
+  </div>
+</div>
