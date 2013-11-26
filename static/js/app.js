@@ -13,6 +13,7 @@ var app = angular.module('vault', [
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/projects', {templateUrl: '/static/partials/projects.html', controller: 'ProjectsCtrl'});
   $routeProvider.when('/projects/:id', {templateUrl: '/static/partials/detail.html', controller: 'DetailCtrl'});
+  $routeProvider.when('/login', {templateUrl: '/static/partials/login.html', controller: 'LoginCtrl'});
   $routeProvider.otherwise({redirectTo: '/projects'});
 }]);
 

@@ -2,9 +2,9 @@ from tastypie import fields
 from tastypie.resources import ModelResource
 from models import Project, Secret, ProjectMember
 from django.contrib.auth.models import User
-from tastypie.authentication import BasicAuthentication, ApiKeyAuthentication, MultiAuthentication
+from tastypie.authentication import BasicAuthentication, ApiKeyAuthentication, MultiAuthentication, Authentication
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
-from tastypie.authorization import DjangoAuthorization
+from tastypie.authorization import DjangoAuthorization, Authorization
 
 
 class ProjectMemberResource(ModelResource):
@@ -26,6 +26,8 @@ class ProjectResource(ModelResource):
             'create_date': ['exact', 'lt', 'lte', 'gte', 'gt'],
             'modified_date': ['exact', 'lt', 'lte', 'gte', 'gt'],
         }
+        authentication = Authentication()
+        authorization = Authorization()
         #authentication = MultiAuthentication(BasicAuthentication(), ApiKeyAuthentication())
         #authorization = DjangoAuthorization()
 

@@ -1,7 +1,24 @@
 <div class="container">
-  <h3>Projects <a data-toggle="modal" href="#create-project-modal" class="linkify-glyphicon"><span class="glyphicon glyphicon-plus-sign"></span></a></h3>
+  <h1>{{created}}</h1>
+  <h3>Projects <span class="glyphicon glyphicon-plus-sign text-primary" ng-click="toggleForm()"></span></h3>
   <div class="row">
     <div class="col-md-10">
+      <form name="createProject">
+        <div ng-show="show_form">
+          <div class="form-group">
+            <label>Project Name</label>
+            <input type="text" class="form-control" name="project-name" ng-model="projectName"
+                   placeholder="Enter a name for your project" required>
+          </div>
+          <p></p>
+          <div class="form-group">
+            <label>Project Description</label>
+            <input type="text" class="form-control" name="project-desc" ng-model="projectDesc"
+                   placeholder="Enter a short description of your project" required>
+          </div>
+          <button type="submit" class="btn btn-primary" ng-click="createNewProject()" style="margin-bottom: 20px">Submit</button>
+        </div>
+      </form>
       <!--Body content-->
       <table class="table table-striped">
         <tr>
@@ -29,3 +46,4 @@
     </div>
   </div>
 </div>
+

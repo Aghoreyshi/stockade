@@ -6,17 +6,42 @@ var vaultControllers = angular.module('vault.controllers', []);
 
 vaultControllers.controller('ProjectsCtrl', ['$scope', '$http',
     function ProjectsCtrl($scope, $http) {
-      $http({method: 'GET', url: '/api/v1/projects/'}).
-        success(function(data, status, headers, config) {
-          // this callback will be called asynchronously
-          // when the response is available
-          $scope.projects = data.objects;
-        }).
-        error(function(data, status, headers, config) {
-          $scope.projects = data || status;
-        });
+      $scope.getProjects = function() {
+        $http({method: 'GET', url: '/api/v1/projects/'}).
+          success(function(data, status, headers, config) {
+            // this callback will be called asynchronously
+            // when the response is available
+            $scope.projects = data.objects;
+          }).
+          error(function(data, status) {
+            $scope.projects = data || status;
+          });
+      }
+
+      $scope.getProjects();
+      $scope.show_form = false;
+
+      $scope.toggleForm = function () {
+        $scope.show_form = !$scope.show_form;
+      };
+
+      $scope.createNewProject = function () {
+        $http({method: 'POST', url: '/api/v1/projects/',
+          data: "{\"name\":\"" + $scope.projectName + "\",\"description\":\"" + $scope.projectDesc +"\"}",
+          headers: {"Content-Type": "application/json"}}).success(function(data){
+            $scope.created = "We just made a fuckin secret!!: ";
+            $scope.toggleForm();
+            $scope.projectName = "";
+            $scope.projectDesc = "";
+            $scope.getProjects();
+          }).
+          error(function(data, status, headers, config) {
+            $scope.created = "Failed to create! response: " + JSON.stringify(config) + "status: " + status;
+          });
+      };
 
       $scope.orderProp = 'name';
+
 }]);
 
 vaultControllers.controller('DetailCtrl',
@@ -28,12 +53,13 @@ vaultControllers.controller('DetailCtrl',
       });
 
       $http({method: 'GET', url: '/api/v1/secrets/?project__id=' + $scope.id}).
-        success(function(data, status, headers, config) {
+        success(function(data) {
           $scope.secrets = data.objects;
         }).
-        error(function(data, status, headers, config) {
+        error(function(data, status) {
           $scope.secrets = data || status;
         });
 
-      $scope.orderProp = 'category';
+      $scope.orderProp = '-create_date';
 });
+

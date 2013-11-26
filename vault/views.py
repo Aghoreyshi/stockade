@@ -1,6 +1,5 @@
 # Create your views here.
 import json
-
 from barbicanclient import client
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
