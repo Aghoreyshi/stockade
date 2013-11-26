@@ -21,6 +21,11 @@ vaultControllers.controller('ProjectsCtrl', ['$scope', '$http',
       $scope.getProjects();
       $scope.show_form = false;
 
+      $scope.alerts = [];
+      $scope.closeAlert = function(index) {
+        $scope.alerts.splice(index, 1);
+      };
+
       $scope.toggleForm = function () {
         $scope.show_form = !$scope.show_form;
       };
@@ -29,14 +34,16 @@ vaultControllers.controller('ProjectsCtrl', ['$scope', '$http',
         $http({method: 'POST', url: '/api/v1/projects/',
           data: "{\"name\":\"" + $scope.projectName + "\",\"description\":\"" + $scope.projectDesc +"\"}",
           headers: {"Content-Type": "application/json"}}).success(function(data){
-            $scope.created = "We just made a fuckin secret!!: ";
+            $scope.created = true;
             $scope.toggleForm();
             $scope.projectName = "";
             $scope.projectDesc = "";
+            $scope.alerts.push({msg: "Project creation was successful!", type: "success"});
             $scope.getProjects();
           }).
           error(function(data, status, headers, config) {
             $scope.created = "Failed to create! response: " + JSON.stringify(config) + "status: " + status;
+            $scope.alerts.push({msg: "Project creation failed for some reason. :/", type: "danger"});
           });
       };
 

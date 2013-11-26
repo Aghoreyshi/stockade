@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>{{created}}</h1>
+  <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)"><strong>{{alert.msg}}</strong></alert>
   <h3>Projects <span class="glyphicon glyphicon-plus-sign text-primary" ng-click="toggleForm()"></span></h3>
   <div class="row">
     <div class="col-md-10">
@@ -16,7 +16,7 @@
             <input type="text" class="form-control" name="project-desc" ng-model="projectDesc"
                    placeholder="Enter a short description of your project" required>
           </div>
-          <button type="submit" class="btn btn-primary" ng-click="createNewProject()" style="margin-bottom: 20px">Submit</button>
+          <button type="Create" class="btn btn-primary" ng-click="createNewProject()" style="margin-bottom: 20px">Submit</button>
         </div>
       </form>
       <!--Body content-->
