@@ -16,7 +16,7 @@
             <input type="text" class="form-control" name="project-desc" ng-model="projectDesc"
                    placeholder="Enter a short description of your project" required>
           </div>
-          <button type="Create" class="btn btn-primary" ng-click="createNewProject()" style="margin-bottom: 20px">Submit</button>
+          <button type="submit" class="btn btn-primary" ng-click="createNewProject()" style="margin-bottom: 20px">Create</button>
         </div>
       </form>
       <!--Body content-->
@@ -24,12 +24,13 @@
         <tr>
           <th>Project Name</th>
           <th>Description</th>
+          <th>Delete</th>
         </tr>
         <tr ng-repeat="project in projects | filter:query | orderBy:orderProp">
           <td><a href="#/projects/{{project.id}}">{{project.name}}</a></td>
           <td>{{project.description}}</td>
+          <td><span class="glyphicon glyphicon-minus-sign text-danger" ng-click="deleteProject(project.id, project.name)"></span></td>
         </tr>
-
       </table>
     </div>
     <div class="col-md-2">

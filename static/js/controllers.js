@@ -33,18 +33,38 @@ vaultControllers.controller('ProjectsCtrl', ['$scope', '$http',
       $scope.createNewProject = function () {
         $http({method: 'POST', url: '/api/v1/projects/',
           data: "{\"name\":\"" + $scope.projectName + "\",\"description\":\"" + $scope.projectDesc +"\"}",
-          headers: {"Content-Type": "application/json"}}).success(function(data){
-            $scope.created = true;
+          headers: {"Content-Type": "application/json"}}).
+          success(function(){
             $scope.toggleForm();
             $scope.projectName = "";
             $scope.projectDesc = "";
-            $scope.alerts.push({msg: "Project creation was successful!", type: "success"});
+            $scope.alerts.push({msg: "Project creation was successful.", type: "success"});
             $scope.getProjects();
           }).
           error(function(data, status, headers, config) {
-            $scope.created = "Failed to create! response: " + JSON.stringify(config) + "status: " + status;
-            $scope.alerts.push({msg: "Project creation failed for some reason. :/", type: "danger"});
+            $scope.alerts.push({msg: "Project creation failed. :/", type: "danger"});
+            /* For debugging
+            $scope.alerts.push({msg: "config: " + JSON.stringify(config) +
+            " response: " + JSON.stringify(data), type: "danger"});
+            */
           });
+      };
+
+      $scope.deleteProject = function (id, name) {
+        if (confirm("Are you sure you want to delete the project named " + name + "?")){
+          $http({method: 'DELETE', url: '/api/v1/projects/' + id.toString()}).
+            success(function(){
+              $scope.alerts.push({msg: "The project has been deleted.", type: "success"});
+              $scope.getProjects();
+            }).
+            error(function(data, status, headers, config){
+              $scope.alerts.push({msg: "Failed to delete the project.", type: "danger"});
+              /* For debugging
+               $scope.alerts.push({msg: "config: " + JSON.stringify(config) +
+               " response: " + JSON.stringify(data), type: "danger"});
+              */
+            });
+        }
       };
 
       $scope.orderProp = 'name';

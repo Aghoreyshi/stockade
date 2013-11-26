@@ -8,8 +8,8 @@ var app = angular.module('vault', [
   'vault.services',
   'vault.directives',
   'vault.controllers',
-  'ui.bootstrap',
-  ]);
+  'ui.bootstrap'
+]);
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/projects', {templateUrl: '/static/partials/projects.html', controller: 'ProjectsCtrl'});
   $routeProvider.when('/projects/:id', {templateUrl: '/static/partials/detail.html', controller: 'DetailCtrl'});
