@@ -24,12 +24,12 @@
         <tr>
           <th>Project Name</th>
           <th>Description</th>
-          <th>Delete</th>
+          <th></th>
         </tr>
         <tr ng-repeat="project in projects | filter:query | orderBy:orderProp">
           <td><a href="#/projects/{{project.id}}">{{project.name}}</a></td>
           <td>{{project.description}}</td>
-          <td><span class="glyphicon glyphicon-minus-sign text-danger" ng-click="deleteProject(project.id, project.name)"></span></td>
+          <td><span class="glyphicon glyphicon-minus-sign text-danger" ng-click="deleteProject(project)"></span></td>
         </tr>
       </table>
     </div>

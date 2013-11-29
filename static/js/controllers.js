@@ -50,12 +50,12 @@ vaultControllers.controller('ProjectsCtrl', ['$scope', '$http',
           });
       };
 
-      $scope.deleteProject = function (id, name) {
-        if (confirm("Are you sure you want to delete the project named " + name + "?")){
-          $http({method: 'DELETE', url: '/api/v1/projects/' + id.toString()}).
+      $scope.deleteProject = function (project) {
+        if (confirm("Are you sure you want to delete the project named " + project.name + "?")){
+          $http({method: 'DELETE', url: '/api/v1/projects/' + project.id.toString()}).
             success(function(){
               $scope.alerts.push({msg: "The project has been deleted.", type: "success"});
-              $scope.getProjects();
+              $scope.projects.splice($scope.projects.indexOf(project), 1);
             }).
             error(function(data, status, headers, config){
               $scope.alerts.push({msg: "Failed to delete the project.", type: "danger"});
